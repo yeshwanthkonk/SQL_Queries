@@ -43,7 +43,7 @@ seat_no	status	person_id
 5	0	0
 The first request is completed because seat number 3 is free. The second request is ignored because seat number 2 is already reserved by another person. The third request is completed because seat number 1 was reserved by this person, so they can purchase it.
 */
--- Only First 2 step, which process upto first 2 request for same seat_no
+-------------------------------------------------------------------------------------------------------------------------- Only First 2 step, which process upto first 2 request for same seat_no
 WITH reqs AS (
   SELECT *, ROW_NUMBER() OVER (PARTITION BY seat_no ORDER BY request_id) AS rn
   FROM requests
@@ -95,7 +95,7 @@ step2 AS (
 SELECT * FROM step2 ORDER BY seat_no;
 
 
--- Recursive Solution for all steps:
+------------------------------------------------------------------------------------------------------------------------------- Recursive Solution for all steps:
 WITH RECURSIVE process_requests AS (
   -- Base case: starting with initial seat states
   SELECT 
